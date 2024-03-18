@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-
 import Phaser from 'phaser';
 import { PhaserGame } from './game/PhaserGame';
+import { PhaserGame2 } from './game/PhaserGame2';
 
 function App ()
 {
@@ -72,7 +72,7 @@ function App ()
 
     return (
         <div id="app">
-            <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
+            <PhaserGame2 ref={phaserRef} currentActiveScene={currentScene} />
             <div>
                 <div>
                     <button className="button" onClick={changeScene}>Change Scene</button>

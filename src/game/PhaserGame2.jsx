@@ -8,7 +8,7 @@ import { MainMenu } from './scenes/MainMenu';
 import Phaser from 'phaser';
 import { Preloader } from './scenes/Preloader';
 
-export const PhaserGame = forwardRef(function PhaserGame ({ currentActiveScene }, ref)
+export const PhaserGame2 = forwardRef(function PhaserGame ({ currentActiveScene }, ref)
 {
     // Find out more information about the Game Config at:
     // https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -19,9 +19,6 @@ export const PhaserGame = forwardRef(function PhaserGame ({ currentActiveScene }
         parent: 'game-container',
         backgroundColor: '#028af8',
         scene: [
-            Boot,
-            Preloader,
-            MainMenu,
             Game,
             GameOver
         ]
@@ -86,6 +83,6 @@ export const PhaserGame = forwardRef(function PhaserGame ({ currentActiveScene }
 });
 
 // Props definitions
-PhaserGame.propTypes = {
+PhaserGame2.propTypes = {
     currentActiveScene: PropTypes.func 
 }
