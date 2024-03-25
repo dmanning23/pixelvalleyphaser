@@ -2,6 +2,11 @@ import { useRef, useState } from 'react';
 import Phaser from 'phaser';
 import { PhaserGame } from './game/PhaserGame';
 import { PhaserGame2 } from './game/PhaserGame2';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { EventBus } from './game/EventBus';
+
+
 
 function App ()
 {
@@ -70,24 +75,60 @@ function App ()
         
     }
 
+    const handleClick = ev => {
+        const navigate = useNavigate();
+        navigate(`/location/`);
+    };
+
+    EventBus.on('navigateLocation', (data) => {
+        //handleClick(data);
+    });
+
     return (
-        <div id="app">
-            <PhaserGame2 ref={phaserRef} currentActiveScene={currentScene} />
-            <div>
-                <div>
-                    <button className="button" onClick={changeScene}>Change Scene</button>
+        <BrowserRouter>
+            <Routes>
+                <Route exact path="/" element={
+                    <div id="app">
+                        <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
+                        <div>
+                            <div>
+                                <button className="button" onClick={changeScene}>Change Scene</button>
+                            </div>
+                            <div>
+                                <button disabled={canMoveSprite} className="button" onClick={moveSprite}>Toggle Movement</button>
+                            </div>
+                            <div className="spritePosition">Sprite Position:
+                                <pre>{`{\n  x: ${spritePosition.x}\n  y: ${spritePosition.y}\n}`}</pre>
+                            </div>
+                            <div>
+                                <button className="button" onClick={addSprite}>Add New Sprite</button>
+                            </div>
+                        </div>
+                    </div>
+                }/>
+                <Route path="/location/" element={
+                    <div id="app">
+                    <PhaserGame2 ref={phaserRef} currentActiveScene={currentScene} />
+                    <div>
+                        <div>
+                            <button className="button" onClick={changeScene}>Change Scene</button>
+                        </div>
+                        <div>
+                            <button disabled={canMoveSprite} className="button" onClick={moveSprite}>Toggle Movement</button>
+                        </div>
+                        <div className="spritePosition">Sprite Position:
+                            <pre>{`{\n  x: ${spritePosition.x}\n  y: ${spritePosition.y}\n}`}</pre>
+                        </div>
+                        <div>
+                            <button className="button" onClick={addSprite}>Add New Sprite</button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <button disabled={canMoveSprite} className="button" onClick={moveSprite}>Toggle Movement</button>
-                </div>
-                <div className="spritePosition">Sprite Position:
-                    <pre>{`{\n  x: ${spritePosition.x}\n  y: ${spritePosition.y}\n}`}</pre>
-                </div>
-                <div>
-                    <button className="button" onClick={addSprite}>Add New Sprite</button>
-                </div>
-            </div>
-        </div>
+            }/>
+            </Routes>
+        </BrowserRouter>
+
+        
     )
 }
 
